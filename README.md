@@ -168,7 +168,7 @@ Peak Performance: {
   Stat: 2409.5,
   Remove: 2798.0000000000005
 }
-\
+```
 
 ## License
 
