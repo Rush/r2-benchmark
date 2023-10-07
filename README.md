@@ -16,30 +16,30 @@ My benchmarks yielded the following results over 3 different buckets, executed f
 
 ## Installation
 
-\```bash
+```bash
 npm install
-\```
+```
 
 ## Configuration
 
 Begin by creating a `.env` file using the template provided in `.env.example`:
 
-\```plaintext
+```plaintext
 # Specify one or more buckets, separated by a comma.
 # More buckets can theoretically provide higher performance if we approach the I/O limits of a single bucket.
 S3_BUCKET=bucket1,bucket2,bucket3
 S3_HOSTNAME=XXX.r2.cloudflarestorage.com
 S3_ACCESS_KEY=some_access_key
 S3_SECRET_KEY=some_secret_key
-\```
+```
 
 ## Usage
 
 Run the benchmark using:
 
-\```bash
+```bash
 node r2-benchmark.js <number of objects> <number of threads>
-\```
+```
 
 - **Number of objects**: Total objects the program will write to the bucket.
 - **Number of threads**: Threads that will use separate keep-alive TCP connections from an HTTP agent. A high number of threads are necessary for sustaining top throughput.
@@ -52,13 +52,13 @@ The benchmark will execute in stages:
 
 ### Example:
 
-\```bash
+```bash
 > node r2-benchmark.js 10000 1000
-\```
+```
 
 Output:
 
-\```plaintext
+```plaintext
 > node r2-benchmark.js 10000 1000
 Write: scheduling for 10000 objects in 1000 threads and 1 buckets
 03:10:02: Write: Ops 0.0/s Throughput 0.0MB/s
@@ -126,7 +126,7 @@ Retrying on TRANSIENT error
 Retrying on TRANSIENT error
 03:10:41: Remove: Ops 2.0/s Throughput 0.0MB/s
 Remove took 11403ms. Peak ops 1749.2/s Avg ops 877.0/s  Total size 156.3MB  Recoverable errors 12
-\```
+```
 
 From this execution, we observed:
 - Peak **Write** ops/s: 1284
@@ -147,21 +147,21 @@ To fully evaluate the maximum operations per second (ops/s) achievable, it's adv
 
 On each host, run:
 
-\```bash
+```bash
 node r2-benchmark.js 10000 1000 | tee log-$HOST.txt
-\```
+```
 
 This command will execute the benchmark and save the logs with the hostname as a part of the filename.
 
 After collecting data from all hosts, gather all log files in a single location and analyze the peak performance:
 
-\```bash
+```bash
 node peak-performance.js log*.txt
-\```
+```
 
 Output:
 
-\```plaintext
+```plaintext
 Peak Performance: {
   Write: 5439.7,
   Read: 3111.2000000000003,
